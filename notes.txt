@@ -1,0 +1,18 @@
+capabilities would result in too many combinations
+- a real world library NEEDS a compiler plugin!
+  every type issue must be caught at compile time, so that it behaves as if we had implemented the mappers ourselves.
+  otherwise, an unknown API change will result in runtime errors instead of compile errors!
+- a proof of concept can just throw runtime errors when a capability is not configured
+
+reflection cannot distinguish between these two:
+- class Foo(val firstName: String, val lastName: String)
+- class Bar(firstName: String, lastName: String) {
+      val lastName = firstName
+      val firstName = lastName
+  }
+- if that is required, we need to use bytecode analysis...
+
+
+
+look at:
+- public fun IrElement.remapTypes(typeRemapper: TypeRemapper): Unit
