@@ -40,17 +40,18 @@ private fun <T : Any> analyze(
     classToAnalyze: KClass<T>,
     requiredPropertiesToSet: Map<String, KType>,
 ): ObjectCreator<T>? {
+    logDebugLine("analyzing $classToAnalyze to find a matching object creator...")
     @Suppress("UNCHECKED_CAST")
     val allSettablesByName = classToAnalyze.memberProperties
         .mapNotNull { it as? KMutableProperty1<T, Any?> }
         .associateBy { it.name }
     for ((name, prop) in allSettablesByName) {
-        logDebugLine("mutable property $name: ${prop.returnType}")
+        logDebugLine("found mutable property $name: ${prop.returnType}")
     }
 
     val creators = classToAnalyze.constructors.mapNotNull { ctor ->
         val isPrimaryCtor = ctor == classToAnalyze.primaryConstructor
-        logDebugLine("${ctor.name} (is primary ctor: $isPrimaryCtor)")
+        logDebugLine("found constructor ${ctor.name} (is primary ctor: $isPrimaryCtor)")
         for (parameter in ctor.parameters) {
             logDebugLine("    parameter ${parameter.name}: ${parameter.type}")
         }
@@ -110,7 +111,7 @@ private fun <T : Any> visitCtor(
     }
     val unaccountedNames = allParamNames - requiredNames
     if (unaccountedNames.isNotEmpty()) {
-        logDebugLine("ctor is unusable, because it following params are not accounted for: $unaccountedNames")
+        logDebugLine("ctor is unusable, because following params are not accounted for: $unaccountedNames")
         return null
     }
 

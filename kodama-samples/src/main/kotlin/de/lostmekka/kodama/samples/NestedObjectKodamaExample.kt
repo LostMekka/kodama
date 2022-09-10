@@ -17,7 +17,7 @@ private val stringToUuidKodama = primitiveKodama<String, UUID>(
 )
 private val addressKodama = kodama<AddressDto, AddressEntity> {
     mapping(AddressDto::street, AddressEntity::street)
-    mapping(AddressDto::street, AddressEntity::city)
+    mapping(AddressDto::city, AddressEntity::city)
 }
 private val nestedKodama = kodama<UserDto, UserEntity> {
     mapping(UserDto::id, UserEntity::id, stringToUuidKodama)

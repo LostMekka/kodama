@@ -6,8 +6,8 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.path
 
-class FileInfo(val file: IrFile) {
-    val fileSource by lazy { File(file.path).readText() }
+class FileInfo(private val file: IrFile) {
+    private val fileSource by lazy { File(file.path).readText() }
     fun createMessageLocation(element: IrElement): CompilerMessageLocationWithRange {
         val info = file.fileEntry.getSourceRangeInfo(element.startOffset, element.endOffset)
         return CompilerMessageLocationWithRange.create(
