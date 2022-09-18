@@ -13,6 +13,34 @@ reflection cannot distinguish between these two:
 - if that is required, we need to use bytecode analysis...
 
 
+plan for creating this library:
+- PHASE 1:
+  - use compiler plugin only to validate the DSL
+  - dont generate any code
+  - do the mapping via reflection at runtime
+- PHASE 2:
+  - refactor the runtime mapping into small building blocks
+  - let the compiler plugin generate code that uses those building blocks
+  - completely replace all reflection calls at runtime with generated "hard coded" code
+
+
+capabilities
+- capabilities are:
+  - mapForward: create a new target object from a given source object
+  - mapBackward: create a new source object from a given target object
+  - updateForward: update an existing target object based on a given source object
+  - updateBackward: update an existing source object based on a given target object
+  - reversible: implicit capability derived from mapForward == mapBackward && updateForward == updateBackward
+- currently, mapForward is always on, but this is not always desired!
+  - sometimes, only updateForward may be required
+  --> make all 4 base capabilities equally optional
+  --> also validate every kodama so that it is not possible to create a kodama with no capabilities
+- kodama capabilities MUST be part of the type, otherwise we cannot statically analyze them. example:
+  - you use a kodama provided by a library in your own kodama
+  - your kodama needs the updateForward capability
+  --> the compiler plugin needs to know whether the imported kodama also has the updateForward capability
+- best way to have capabilities in the type would be interfaces: one for each capability
+--> the compiler plugin must completely replace the kodama DSL call with something that creates a specific type
 
 look at:
 - public fun IrElement.remapTypes(typeRemapper: TypeRemapper): Unit
