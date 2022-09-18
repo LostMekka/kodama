@@ -1,6 +1,6 @@
 rootProject.name = "kodama"
-include("kodama-core")
 include("kodama-compiler-plugin")
+include("kodama-core")
 include("kodama-samples")
 
 includeBuild("kodama-gradle-plugin") {

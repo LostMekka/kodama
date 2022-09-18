@@ -15,11 +15,11 @@ private val stringToUuidKodama = primitiveKodama<String, UUID>(
     forward = { UUID.fromString(it) },
     backward = { it.toString() },
 )
-private val addressKodama = kodama<AddressDto, AddressEntity> {
+private val addressKodama = kodama {
     mapping(AddressDto::street, AddressEntity::street)
     mapping(AddressDto::city, AddressEntity::city)
 }
-private val nestedKodama = kodama<UserDto, UserEntity> {
+private val nestedKodama = kodama {
     mapping(UserDto::id, UserEntity::id, stringToUuidKodama)
     mapping(UserDto::name, UserEntity::name)
     mapping(UserDto::addresses, UserEntity::addresses, addressKodama.asListKodama())

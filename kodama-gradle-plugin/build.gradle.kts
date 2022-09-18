@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
     id("java-gradle-plugin")
 }
 
@@ -28,7 +28,7 @@ tasks.withType<KotlinCompile>().configureEach {
 
 gradlePlugin {
     plugins {
-        create("redactedPlugin") {
+        create("kodamaPlugin") {
             id = "de.lostmekka.kodama"
             implementationClass = "de.lostmekka.kodama.gradle.KodamaGradlePlugin"
         }
