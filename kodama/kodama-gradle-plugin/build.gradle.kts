@@ -1,12 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm")
     id("java-gradle-plugin")
 }
-
-group = "de.lostmekka.kodama"
-version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -20,9 +17,6 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.freeCompilerArgs = listOf(
-        "-opt-in=kotlin.RequiresOptIn",
-    )
     doLast { println("my version: $version") }
 }
 

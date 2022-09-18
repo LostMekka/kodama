@@ -1,9 +1,3 @@
-buildscript {
-    dependencies {
-        classpath("de.lostmekka.kodama:kodama-gradle-plugin")
-    }
-}
-
 plugins {
     kotlin("jvm") version "1.7.10" apply false
 }

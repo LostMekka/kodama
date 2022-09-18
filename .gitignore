@@ -2,3 +2,6 @@
 /*/build
 .gradle
 .idea
+/kodama/kodama-compiler-plugin/build
+/kodama/kodama-core/build
+/kodama/kodama-gradle-plugin/build

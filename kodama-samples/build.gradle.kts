@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") version "1.7.10"
     id("de.lostmekka.kodama")
 }
 
@@ -10,13 +10,4 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-}
-
-configurations.configureEach {
-    resolutionStrategy.dependencySubstitution {
-        substitute(module("de.lostmekka.kodama:kodama-core"))
-            .using(project(":kodama-core"))
-        substitute(module("de.lostmekka.kodama:kodama-compiler-plugin"))
-            .using(project(":kodama-compiler-plugin"))
-    }
 }

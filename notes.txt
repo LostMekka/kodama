@@ -42,5 +42,14 @@ capabilities
 - best way to have capabilities in the type would be interfaces: one for each capability
 --> the compiler plugin must completely replace the kodama DSL call with something that creates a specific type
 
+
+concepts to think about:
+- one-way properties like IDs in DB entities
+  - mapForward and updateForward needs to skip the ID
+  - mapBackward needs to set the ID
+- update operation for collection kodamas? does that even work?
+- duplicate operation?
+- update firebreaks: make it possible to use map instead of update for nested objects
+
 look at:
 - public fun IrElement.remapTypes(typeRemapper: TypeRemapper): Unit
